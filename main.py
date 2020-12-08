@@ -1,5 +1,4 @@
 import discord
-import random
 import json
 import requests
 import asyncio
@@ -108,4 +107,5 @@ async def ban(ctx, member : discord.Member, *, reason=None):
     await ctx.send(embed = embed)
     
 token = os.environ.get('BOT_TOKEN')
+
 bot.run(str(token))
