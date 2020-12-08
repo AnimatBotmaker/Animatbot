@@ -111,7 +111,19 @@ async def ban(ctx, member : discord.Member, *, reason=None):
 async def say(ctx, *arg):
     await ctx.send(' '.join(arg))
     await ctx.message.delete()
+    
+@bot.command()
+@commands.dm_only()
+async def invite(ctx):
+    embed = discord.Embed(title="Animat", description="Рп бот сделанный просто по фану", color=0xeee657)
 
+    embed.add_field(name="Автор", value="Animat#7603", inline=False)
+    
+    embed.add_field(name="Пригласить бота", value="https://discord.com/api/oauth2/authorize?client_id=784328529462558730&permissions=0&scope=bot", inline=False)
+
+    embed.add_field(name="Официальный сервер бота", value="https://discord.gg/xeghGZNKnQ", inline=False)
+
+    await ctx.send(embed=embed)
 
 token = os.environ.get('BOT_TOKEN')
 
