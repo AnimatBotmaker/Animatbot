@@ -108,3 +108,4 @@ async def ban(ctx, member : discord.Member, *, reason=None):
     await ctx.send(embed = embed)
     
 token = os.environ.get('BOT_TOKEN')
+bot.run(str(token))
