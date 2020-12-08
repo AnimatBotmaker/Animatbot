@@ -106,7 +106,7 @@ async def ban(ctx, member : discord.Member, *, reason=None):
     await member.ban(reason=reason)
     await ctx.send(embed = embed)
     
-@Bot.command()
+@bot.command()
 @commands.has_permissions(administrator= True)
 async def say(ctx, *args):
 await ctx.message.delete()
