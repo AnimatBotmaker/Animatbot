@@ -105,17 +105,13 @@ async def ban(ctx, member : discord.Member, *, reason=None):
     embed = discord.Embed(color = 0xff9900, description = f'{member} был забанен')
     await member.ban(reason=reason)
     await ctx.send(embed = embed)
-    
-@bot.command()
+
+@bot.command(pass_context=True)
 @commands.has_permissions(administrator= True)
-async def say(ctx, *args):
-await ctx.message.delete()
-if not args:
-await ctx.send('Необходимо ввести текст сообщения')
-text = ''
-for item in args:
-text = text + item + ' '
-await channel.send(text)
+async def say(ctx, *arg):
+    await ctx.send(' '.join(arg))
+    await ctx.message.delete()
+
 
 token = os.environ.get('BOT_TOKEN')
 
