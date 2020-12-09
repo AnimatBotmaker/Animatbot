@@ -105,12 +105,6 @@ async def ban(ctx, member : discord.Member, *, reason=None):
     await member.ban(reason=reason)
     await ctx.send(embed = embed)
 
-@bot.command(pass_context=True)
-@commands.has_permissions(administrator= True)
-async def say(ctx, *arg):
-    await ctx.send(' '.join(arg))
-    await ctx.message.delete()
-    
 @bot.command()
 @commands.dm_only()
 async def invite(ctx):
@@ -123,7 +117,7 @@ async def invite(ctx):
     embed.add_field(name="Официальный сервер бота", value="https://discord.gg/xeghGZNKnQ", inline=False)
 
     await ctx.send(embed=embed)
-    
+
 @bot.event
 async def on_message(message):
     if not message.author.bot:
@@ -136,9 +130,6 @@ async def on_message(message):
         with open('level.json','w') as f:
             json.dump(users, f)
     await bot.process_commands(message)
-
-
-
 
 async def update_data(users, user,server):
     if not str(server.id) in users:
