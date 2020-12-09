@@ -181,6 +181,11 @@ async def level(ctx,member: discord.Member = None):
       embed.set_author(name = member, icon_url = member.avatar_url)
 
       await ctx.send(embed = embed)
+    
+@bot.command()
+@commands.has_permissions(administrator=True)
+async def say(ctx, message=None):
+    await ctx.send(message)
 
 token = os.environ.get('BOT_TOKEN')
 
