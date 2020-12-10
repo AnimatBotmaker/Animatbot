@@ -186,6 +186,31 @@ async def level(ctx,member: discord.Member = None):
 @commands.has_permissions(administrator=True)
 async def say(ctx, message=None):
     await ctx.send(message)
+    
+@bot.event
+async def on_guild_join(guild):
+    category = guild.categories[0]
+    channel = category.channels[0]
+    
+    embed = discord.Embed(title="Спасибо", description="Что пригласили меня на ваш сервер! Список всех команд:", color=0xeee657)
+
+    embed.add_field(name=">hello", value="Сказать привет боту", inline=False)
+    embed.add_field(name=">hug", value="Обнять кого-то", inline=False)
+    embed.add_field(name=">pat", value="Погладить кого-то", inline=False)
+    embed.add_field(name=">info", value="Немного информации о боте", inline=False)
+    embed.add_field(name=">help", value="Показывает это сообщение", inline=False)
+    embed.add_field(name=">clear", value="Удаляет сообщения(Только модератором доступна эта команда)", inline=False)
+    embed.add_field(name=">avatar", value="Показывает аватарку игрока", inline=False)
+    embed.add_field(name=">kick", value="Кикает участника(Только модератором доступна эта команда)", inline=False)
+    embed.add_field(name=">ban", value="Банит участника(Только модератором доступна эта команда)", inline=False)
+    embed.add_field(name=">clear", value="Отчищает чат(Только модераторам доступна эта команда) ", inline=False)
+    embed.add_field(name=">level", value="Показывает ваш уровень", inline=False)
+    embed.add_field(name=">invite", value="(Работает только в лс бота)", inline=False)
+    embed.add_field(name="Автор", value="Animat#7603", inline=False)
+    embed.add_field(name="Серверов", value=f"{len(bot.guilds)}", inline=False)
+    embed.add_field(name="Пригласить бота", value="https://discord.com/api/oauth2/authorize?client_id=784328529462558730&permissions=0&scope=bot", inline=False)
+
+    await channel.send(embed=embed)
 
 token = os.environ.get('BOT_TOKEN')
 
