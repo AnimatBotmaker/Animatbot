@@ -52,7 +52,7 @@ async def help(ctx):
     embed.add_field(name=">avatar", value="Показывает аватарку игрока", inline=False)
     embed.add_field(name=">kick", value="Кикает участника(Только модератором доступна эта команда)", inline=False)
     embed.add_field(name=">ban", value="Банит участника(Только модератором доступна эта команда)", inline=False)
-    embed.add_field(name=">clear", value="Отчищает ", inline=False)
+    embed.add_field(name=">clear", value="Отчищает чат(Только модераторам доступна эта команда) ", inline=False)
     embed.add_field(name=">level", value="Показывает ваш уровень", inline=False)
     embed.add_field(name=">invite", value="(Работает только в лс бота)", inline=False)
     
