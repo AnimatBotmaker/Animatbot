@@ -155,7 +155,7 @@ async def level_up(users, user, channel, server):
   lvl_end = int(experience ** (1/4))
   
   if lvl_start < lvl_end:
-      await channel.send('{} has leveled up to Level {}'.format(user.mention, lvl_end))
+      await channel.send('Поздравляю {}! ты достиг {} уровня'.format(user.mention, lvl_end))
       users[str(user.guild.id)][str(user.id)]['level'] = lvl_end
 
 
@@ -169,7 +169,7 @@ async def level(ctx,member: discord.Member = None):
             lvl = users[str(ctx.guild.id)][str(user.id)]['level']
             exp = users[str(ctx.guild.id)][str(user.id)]['experience']
 
-        embed = discord.Embed(title = 'Level {}'.format(lvl), description = f"{exp} XP " ,color = discord.Color.green())
+        embed = discord.Embed(title = 'Уровень {}'.format(lvl), description = f"{exp} Опыт " ,color = discord.Color.green())
         embed.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
         await ctx.send(embed = embed)
     else:
@@ -177,7 +177,7 @@ async def level(ctx,member: discord.Member = None):
           users = json.load(f)
       lvl = users[str(ctx.guild.id)][str(member.id)]['level']
       exp = users[str(ctx.guild.id)][str(member.id)]['experience']
-      embed = discord.Embed(title = 'Level {}'.format(lvl), description = f"{exp} XP" ,color = discord.Color.green())
+      embed = discord.Embed(title = 'Уровень {}'.format(lvl), description = f"{exp} Опыт" ,color = discord.Color.green())
       embed.set_author(name = member, icon_url = member.avatar_url)
 
       await ctx.send(embed = embed)
