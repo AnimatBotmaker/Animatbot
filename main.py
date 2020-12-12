@@ -23,6 +23,9 @@ async def hello(ctx):
 
 @bot.command()
 async def hug(ctx,member:discord.Member):
+    if ctx.author == member:
+        embed = discord.Embed(color = 0xff9900, description = f'Вы не можете сам себя обнять')
+        return await ctx.send(embed = embed)
     response = requests.get('https://some-random-api.ml/animu/hug')
     json_data = json.loads(response.text)
 
@@ -32,12 +35,23 @@ async def hug(ctx,member:discord.Member):
 
 @bot.command()
 async def pat(ctx,member:discord.Member):
+    if ctx.author == member:
+        embed = discord.Embed(color = 0xff9900, description = f'Вы не можете сам себя погладить')
+        return await ctx.send(embed = embed)
     response = requests.get('https://some-random-api.ml/animu/pat')
     json_data = json.loads(response.text)
 
     embed = discord.Embed(color = 0xff9900, description = f'{ctx.author.mention} погладил {member.mention}')
     embed.set_image(url = json_data['link'])
     await ctx.send(embed = embed)
+    
+@bot.command( pass_context = True )
+@commands.has_permissions( manage_messages = True )
+async def clear( ctx, amount = 1 ):
+    await ctx.channel.purge( limit = 1 )
+    await ctx.channel.purge( limit = amount )
+    await ctx.send(f'Удалено {amount} сообщений')
+    await ctx.channel.purge( limit = 1 )
 
 @bot.command()
 async def help(ctx):
