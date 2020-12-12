@@ -90,11 +90,6 @@ async def info(ctx):
     await ctx.send(embed=embed)
 
 @bot.command()
-@commands.has_permissions(administrator = True)
-async def clear(ctx, amount=10):
-    await ctx.channel.purge(limit=amount)
-
-@bot.command()
 async def avatar(ctx,member:discord.Member):
     aef = member.avatar_url
     embed = discord.Embed(color = 0xff9900, description = f'Аватар участника {member.mention}')
