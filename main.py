@@ -45,6 +45,18 @@ async def pat(ctx,member:discord.Member):
     embed.set_image(url = json_data['link'])
     await ctx.send(embed = embed)
     
+@bot.command()
+async def wink(ctx,member:discord.Member):
+    if ctx.author == member:
+        embed = discord.Embed(color = 0xff9900, description = f'Вы не можете сам себе подмигнуть')
+        return await ctx.send(embed = embed)
+    response = requests.get('https://some-random-api.ml/animu/wink')
+    json_data = json.loads(response.text)
+
+    embed = discord.Embed(color = 0xff9900, description = f'{ctx.author.mention} подмигнул {member.mention}')
+    embed.set_image(url = json_data['link'])
+    await ctx.send(embed = embed)
+    
 @bot.command( pass_context = True )
 @commands.has_permissions( manage_messages = True )
 async def clear( ctx, amount = 1 ):
@@ -60,6 +72,7 @@ async def help(ctx):
     embed.add_field(name=">hello", value="Сказать привет боту", inline=False)
     embed.add_field(name=">hug", value="Обнять кого-то", inline=False)
     embed.add_field(name=">pat", value="Погладить кого-то", inline=False)
+    embed.add_field(name=">wink", value="Подмигнуть кому-то", inline=False)
     embed.add_field(name=">info", value="Немного информации о боте", inline=False)
     embed.add_field(name=">help", value="Показывает это сообщение", inline=False)
     embed.add_field(name=">clear", value="Удаляет сообщения(Только модератором доступна эта команда)", inline=False)
