@@ -91,7 +91,7 @@ async def help(ctx):
 async def info(ctx):
     embed = discord.Embed(title="Animat", description="Рп бот сделанный просто по фану", color=0xeee657)
 
-    embed.add_field(name="Автор", value="Animat#7603", inline=False)
+    embed.add_field(name="Автор", value="Animat#1234", inline=False)
     
     embed.add_field(name="Серверов", value=f"{len(bot.guilds)}", inline=False)
 
@@ -135,75 +135,12 @@ async def ban(ctx, member : discord.Member, *, reason=None):
 async def invite(ctx):
     embed = discord.Embed(title="Animat", description="Рп бот сделанный просто по фану", color=0xeee657)
 
-    embed.add_field(name="Автор", value="Animat#7603", inline=False)
+    embed.add_field(name="Автор", value="Animat#1234", inline=False)
     
     embed.add_field(name="Пригласить бота", value="https://discord.com/api/oauth2/authorize?client_id=784328529462558730&permissions=0&scope=bot", inline=False)
 
-    embed.add_field(name="Официальный сервер бота", value="https://discord.gg/xeghGZNKnQ", inline=False)
-
     await ctx.send(embed=embed)
 
-@bot.event
-async def on_message(message):
-    if not message.author.bot:
-        with open('level.json','r') as f:
-            users = json.load(f)
-        await update_data(users, message.author,message.guild)
-        await add_experience(users, message.author, 4, message.guild)
-        await level_up(users, message.author,message.channel, message.guild)
-
-        with open('level.json','w') as f:
-            json.dump(users, f)
-    await bot.process_commands(message)
-
-async def update_data(users, user,server):
-    if not str(server.id) in users:
-        users[str(server.id)] = {}
-        if not str(user.id) in users[str(server.id)]:
-            users[str(server.id)][str(user.id)] = {}
-            users[str(server.id)][str(user.id)]['experience'] = 0
-            users[str(server.id)][str(user.id)]['level'] = 1
-    elif not str(user.id) in users[str(server.id)]:
-            users[str(server.id)][str(user.id)] = {}
-            users[str(server.id)][str(user.id)]['experience'] = 0
-            users[str(server.id)][str(user.id)]['level'] = 1
-
-async def add_experience(users, user, exp, server):
-  users[str(user.guild.id)][str(user.id)]['experience'] += exp
-
-async def level_up(users, user, channel, server):
-  experience = users[str(user.guild.id)][str(user.id)]['experience']
-  lvl_start = users[str(user.guild.id)][str(user.id)]['level']
-  lvl_end = int(experience ** (1/4))
-  
-  if lvl_start < lvl_end:
-      await channel.send('Поздравляю {}! ты достиг {} уровня'.format(user.mention, lvl_end))
-      users[str(user.guild.id)][str(user.id)]['level'] = lvl_end
-
-
-@bot.command(aliases = ['rank','lvl'])
-async def level(ctx,member: discord.Member = None):
-
-    if not member:
-        user = ctx.message.author
-        with open('level.json','r') as f:
-            users = json.load(f)
-            lvl = users[str(ctx.guild.id)][str(user.id)]['level']
-            exp = users[str(ctx.guild.id)][str(user.id)]['experience']
-
-        embed = discord.Embed(title = 'Уровень {}'.format(lvl), description = f"{exp} Опыт " ,color = discord.Color.green())
-        embed.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
-        await ctx.send(embed = embed)
-    else:
-      with open('level.json','r') as f:
-          users = json.load(f)
-      lvl = users[str(ctx.guild.id)][str(member.id)]['level']
-      exp = users[str(ctx.guild.id)][str(member.id)]['experience']
-      embed = discord.Embed(title = 'Уровень {}'.format(lvl), description = f"{exp} Опыт" ,color = discord.Color.green())
-      embed.set_author(name = member, icon_url = member.avatar_url)
-
-      await ctx.send(embed = embed)
-    
 @bot.command()
 @commands.has_permissions(administrator=True)
 async def say(ctx, message=None):
@@ -228,7 +165,7 @@ async def on_guild_join(guild):
     embed.add_field(name=">clear", value="Отчищает чат(Только модераторам доступна эта команда) ", inline=False)
     embed.add_field(name=">level", value="Показывает ваш уровень", inline=False)
     embed.add_field(name=">invite", value="(Работает только в лс бота)", inline=False)
-    embed.add_field(name="Автор", value="Animat#7603", inline=False)
+    embed.add_field(name="Автор", value="Animat#1234", inline=False)
     embed.add_field(name="Серверов", value=f"{len(bot.guilds)}", inline=False)
     embed.add_field(name="Пригласить бота", value="https://discord.com/api/oauth2/authorize?client_id=784328529462558730&permissions=0&scope=bot", inline=False)
 
